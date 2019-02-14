@@ -23,16 +23,31 @@ function win(u, c){
   userScore++;
   userScore_span.innerHTML = userScore;
   compScore_span.innerHTML = compScore;
-  result_p.innerHTML = convert(u) + " > " + convert(c) + "! You win!";
+  const smallUser = "you".fontsize(3).sub();
+  const smallComp = "computer".fontsize(3).sub();
+  const u_div = document.getElementById(u);
+  result_p.innerHTML = `${convert(u)}${smallUser}  >  ${convert(c)}${smallComp}! You Win!`; //ES6
+  u_div.classList.add("green-glow");
+  setTimeout(() => u_div.classList.remove("green-glow"), 400); //ES6
 }
 function lose(u, c){
   compScore++;
   compScore_span.innerHTML = compScore;
   userScore_span.innerHTML = userScore;
-  result_p.innerHTML = convert(c) + " > " + convert(u) + "! You Lose!";
+  const smallUser = "you".fontsize(3).sub();
+  const smallComp = "computer".fontsize(3).sub();
+  const u_div = document.getElementById(u);
+  result_p.innerHTML = `${convert(c)}${smallComp}  >  ${convert(u)}${smallUser}! You Lose!`; //ES6
+  document.getElementById(u).classList.add("red-glow");
+  setTimeout(function() {u_div.classList.remove("red-glow")}, 400);
 }
-function draw(){
-  result_p.innerHTML = "Draw!";
+function draw(u, c){
+  const smallUser = "you".fontsize(3).sub();
+  const smallComp = "computer".fontsize(3).sub();
+  const u_div = document.getElementById(u);
+  result_p.innerHTML = `${convert(u)}${smallUser}  =  ${convert(c)}${smallComp}! DRAW!`; //ES6
+  document.getElementById(u).classList.add("grey-glow");
+  setTimeout(function() {u_div.classList.remove("grey-glow")}, 400);
 }
 function game(userChoice){
   const compChoice = getCompChoice();
@@ -53,7 +68,7 @@ function game(userChoice){
     case "rr":
     case "pp":
     case "ss":
-      draw();
+      draw(userChoice, compChoice);
       break;
   }
 }
